@@ -7,7 +7,7 @@ final GlobalKey<NavigatorState> _rootNavigatorKey =
 
 final routes = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: '/home/start',
+  initialLocation: '/home/task',
   observers: [
     GoRouterObserver(),
   ],
@@ -58,6 +58,28 @@ final routes = GoRouter(
                   }
                 },
                 child: const Text('Go back'),
+              ),
+            ],
+          ),
+        );
+      },
+    ),
+    GoRoute(
+      path: '/home/task',
+      builder: (context, state) {
+        return Container(
+          color: Colors.green,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: () => context.push('/home/settings'),
+                child: const Text('Go to settings page'),
+              ),
+              const SizedBox(height: 10.0),
+              ElevatedButton(
+                onPressed: () => context.push('/home/start'),
+                child: const Text('Go to start page'),
               ),
             ],
           ),
