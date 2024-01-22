@@ -3,6 +3,7 @@ import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_app/2_application/pages/dashboard/dashboard_page.dart';
 import 'package:todo_app/2_application/pages/overview/overview_page.dart';
+import 'package:todo_app/2_application/pages/tasks/tasks_page.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({
@@ -16,6 +17,7 @@ class HomePage extends StatefulWidget {
   static const tabs = [
     DashboardPage.pageConfig,
     OverviewPage.pageConfig,
+    TasksPage.pageConfig,
   ];
 
   @override
