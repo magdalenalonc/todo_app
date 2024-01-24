@@ -4,7 +4,6 @@ import 'package:todo_app/2_application/core/go_router_observer.dart';
 import 'package:todo_app/2_application/pages/dashboard/dashboard_page.dart';
 import 'package:todo_app/2_application/pages/home/home_page.dart';
 import 'package:todo_app/2_application/pages/settings/settings_page.dart';
-import 'package:todo_app/2_application/pages/tasks/tasks_page.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'root');
