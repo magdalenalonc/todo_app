@@ -30,10 +30,8 @@ class ToDoEntryIdsParam extends Params {
 class CollectionIdParam extends Params {
   CollectionIdParam({
     required this.collectionId,
-    required this.entryId,
   }) : super();
 
-  final EntryId entryId;
   final CollectionId collectionId;
 
   @override
