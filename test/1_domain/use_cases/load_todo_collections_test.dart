@@ -21,9 +21,9 @@ void main() {
           LoadToDoCollections(toDoRepository: mockToDoRepository);
 
       group(
-        'should return ToDoCollection',
+        'should return ToDoCollection List',
         () {
-          test('when ToDoRepository returns ToDoModel', () async {
+          test('when ToDoRepository returns ToDoCollection', () async {
             final dummyData = Right<Failure, List<ToDoCollection>>(
               List.generate(
                 5,
