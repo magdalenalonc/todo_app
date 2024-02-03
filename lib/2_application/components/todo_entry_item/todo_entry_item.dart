@@ -52,7 +52,9 @@ class ToDoEntryItem extends StatelessWidget {
             onChanged: (value) => context.read<ToDoEntryItemCubit>().update(),
           );
         } else {
-          return const ToDoEntryItemError();
+          return ToDoEntryItemError(
+            handleRetry: () => context.read<ToDoEntryItemCubit>().fetch(),
+          );
         }
       },
     );
