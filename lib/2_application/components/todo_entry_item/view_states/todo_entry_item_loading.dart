@@ -6,18 +6,10 @@ class ToDoEntryItemLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Shimmer(
-      color: Colors.deepOrange,
-      colorOpacity: 0.4,
-      child: Container(
-        color: Colors.grey.withOpacity(0.2),
-        margin: const EdgeInsets.all(0),
-        child: Container(
-          constraints: BoxConstraints(
-            minHeight: 100,
-            minWidth: MediaQuery.of(context).size.width * 0.9,
-          ),
-        ),
+    return ListTile(
+      title: Shimmer(
+        color: Theme.of(context).colorScheme.onBackground,
+        child: const Text('Loading'),
       ),
     );
   }
