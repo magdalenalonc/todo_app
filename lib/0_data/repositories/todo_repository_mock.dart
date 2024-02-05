@@ -60,14 +60,18 @@ class ToDoRepositoryMock implements ToDoRepository {
     try {
       final startIndex = int.parse(collectionId.value) * 10;
       int endIndex = startIndex + 10;
-      if (toDoEntries.length <= endIndex) {
-        endIndex = toDoEntries.length - 1;
+      if (toDoEntries.length < endIndex) {
+        endIndex = toDoEntries.length;
       }
 
-      final entryIds = toDoEntries
-          .sublist(startIndex, endIndex)
-          .map((entry) => entry.id)
-          .toList();
+      List<EntryId> entryIds = [];
+
+      if (startIndex < toDoEntries.length) {
+        entryIds = toDoEntries
+            .sublist(startIndex, endIndex)
+            .map((entry) => entry.id)
+            .toList();
+      }
 
       return Future.delayed(
         const Duration(microseconds: 300),
@@ -94,7 +98,12 @@ class ToDoRepositoryMock implements ToDoRepository {
   @override
   Future<Either<Failure, bool>> createToDoCollection(
       ToDoCollection collection) {
-    toDoCollections.add(collection);
+    final collectionToAdd = ToDoCollection(
+      id: CollectionId.fromUniqueString(toDoCollections.length.toString()),
+      title: collection.title,
+      color: collection.color,
+    );
+    toDoCollections.add(collectionToAdd);
     return Future.delayed(
         const Duration(microseconds: 100), () => const Right(true));
   }

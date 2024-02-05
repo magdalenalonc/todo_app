@@ -72,6 +72,8 @@ final routes = GoRouter(
       name: CreateToDoEntryPage.pageConfig.name,
       path: '$_basePath/overview/${CreateToDoEntryPage.pageConfig.name}',
       builder: (context, state) {
+        final castedExtras = state.extra as CreateToDoEntryPageExtra;
+
         return Scaffold(
           appBar: AppBar(
             title: const Text('Create entry'),
@@ -90,7 +92,9 @@ final routes = GoRouter(
           ),
           body: SafeArea(
             child: CreateToDoEntryPageProvider(
-              collectionId: state.extra as CollectionId,
+              toDoEntryItemAddedCallback:
+                  castedExtras.toDoEntryItemAddedCallback,
+              collectionId: castedExtras.collectionId,
             ),
           ),
         );
