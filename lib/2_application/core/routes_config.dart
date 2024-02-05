@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_app/1_domain/entities/unique_id.dart';
 import 'package:todo_app/2_application/core/go_router_observer.dart';
 import 'package:todo_app/2_application/pages/create_todo_collection/create_todo_collection_page.dart';
+import 'package:todo_app/2_application/pages/create_todo_entry/create_todo_entry_page.dart';
 import 'package:todo_app/2_application/pages/dashboard/dashboard_page.dart';
 import 'package:todo_app/2_application/pages/detail/todo_detail_page.dart';
-import 'package:todo_app/2_application/pages/home/bloc/navigation_todo_cubit.dart';
 import 'package:todo_app/2_application/pages/home/home_page.dart';
 import 'package:todo_app/2_application/pages/overview/overview_page.dart';
 import 'package:todo_app/2_application/pages/settings/settings_page.dart';
@@ -22,9 +21,7 @@ const String _basePath = '/home';
 final routes = GoRouter(
   navigatorKey: _rootNavigatorKey,
   initialLocation: '$_basePath/${DashboardPage.pageConfig.name}',
-  observers: [
-    GoRouterObserver(),
-  ],
+  observers: [GoRouterObserver()],
   routes: [
     GoRoute(
       name: SettingsPage.pageConfig.name,
@@ -72,37 +69,56 @@ final routes = GoRouter(
       },
     ),
     GoRoute(
+      name: CreateToDoEntryPage.pageConfig.name,
+      path: '$_basePath/overview/${CreateToDoEntryPage.pageConfig.name}',
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('Create entry'),
+            leading: BackButton(
+              onPressed: () {
+                if (context.canPop()) {
+                  context.pop();
+                } else {
+                  context.goNamed(
+                    HomePage.pageConfig.name,
+                    pathParameters: {'tab': OverviewPage.pageConfig.name},
+                  );
+                }
+              },
+            ),
+          ),
+          body: SafeArea(
+            child: CreateToDoEntryPageProvider(
+              collectionId: state.extra as CollectionId,
+            ),
+          ),
+        );
+      },
+    ),
+    GoRoute(
       name: ToDoDetailPage.pageConfig.name,
       path: '$_basePath/overview/:collectionId',
       builder: (context, state) {
-        return BlocListener<NavigationToDoCubit, NavigationToDoState>(
-          listenWhen: (previous, current) =>
-              previous.isSecondBodyIsDisplayed !=
-              current.isSecondBodyIsDisplayed,
-          listener: (context, state) {
-            if (context.canPop() && (state.isSecondBodyIsDisplayed ?? false)) {
-              context.pop();
-            }
-          },
-          child: Scaffold(
-            appBar: AppBar(
-              title: const Text('Details'),
-              leading: BackButton(
-                onPressed: () {
-                  if (context.canPop()) {
-                    context.pop();
-                  } else {
-                    context.goNamed(
-                      HomePage.pageConfig.name,
-                      pathParameters: {'tab': OverviewPage.pageConfig.name},
-                    );
-                  }
-                },
-              ),
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('Details'),
+            leading: BackButton(
+              onPressed: () {
+                if (context.canPop()) {
+                  context.pop();
+                } else {
+                  context.goNamed(
+                    HomePage.pageConfig.name,
+                    pathParameters: {'tab': OverviewPage.pageConfig.name},
+                  );
+                }
+              },
             ),
-            body: ToDoDetailPageProvider(
-              collectionId: CollectionId.fromUniqueString(
-                  state.pathParameters['collectionId'] ?? ''),
+          ),
+          body: ToDoDetailPageProvider(
+            collectionId: CollectionId.fromUniqueString(
+              state.pathParameters['collectionId'] ?? '',
             ),
           ),
         );
