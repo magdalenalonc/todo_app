@@ -53,8 +53,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return Scaffold(
       body: SafeArea(
         child: AdaptiveLayout(
@@ -65,9 +63,12 @@ class _HomePageState extends State<HomePage> {
                 builder: (context) => AdaptiveScaffold.standardNavigationRail(
                   leading: IconButton(
                     key: const Key('create-todo-collection'),
-                    onPressed: () {
-                      context
+                    onPressed: () async {
+                      final result = await context
                           .pushNamed(CreateToDoCollectionPage.pageConfig.name);
+                      if (result == true) {
+                        debugPrint('item was created successfully');
+                      }
                     },
                     icon: Icon(CreateToDoCollectionPage.pageConfig.icon),
                     tooltip: 'Add Collection',
@@ -79,12 +80,6 @@ class _HomePageState extends State<HomePage> {
                       SettingsPage.pageConfig.icon,
                     ),
                   ),
-                  selectedLabelTextStyle:
-                      TextStyle(color: theme.colorScheme.onBackground),
-                  selectedIconTheme:
-                      IconThemeData(color: theme.colorScheme.onBackground),
-                  unselectedIconTheme: IconThemeData(
-                      color: theme.colorScheme.onBackground.withOpacity(0.5)),
                   onDestinationSelected: (index) =>
                       _tapOnNavigationDestination(context, index),
                   selectedIndex: widget.index,
