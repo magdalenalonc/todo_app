@@ -24,6 +24,7 @@ dependencies:
   bloc_test: ^9.1.5
   shimmer_animation: ^2.1.0+1
   json_annotation: ^4.8.1
+  hive: ^2.2.3
 
 dev_dependencies:
   flutter_test:
