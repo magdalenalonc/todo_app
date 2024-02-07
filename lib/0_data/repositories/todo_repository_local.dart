@@ -36,7 +36,7 @@ class ToDoRepositoryLocal extends ToDoRepository {
       CollectionId collectionId, ToDoEntry entry) async {
     try {
       final result = await localDataSource.createToDoEntry(
-        collectionId: collectionId,
+        collectionId: collectionId.value,
         entry: toDoEntryToModel(entry),
       );
 
