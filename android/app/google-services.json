@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "450259117695",
+    "project_id": "todo-course-2137",
+    "storage_bucket": "todo-course-2137.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:450259117695:android:1ac30917507d0c9b94814a",
+        "android_client_info": {
+          "package_name": "com.magdalenalonc.todo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWmBOAad75QAwbzPGLAIw_Q0k5gGI1kYo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
