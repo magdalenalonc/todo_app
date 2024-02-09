@@ -1,4 +1,4 @@
-package com.magdalenalonc.todo_app
+package com.magdalenalonc.todo
 
 import io.flutter.embedding.android.FlutterActivity
 
