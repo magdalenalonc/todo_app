@@ -6,6 +6,7 @@ import 'package:todo_app/2_application/core/page_config.dart';
 import 'package:todo_app/2_application/pages/dashboard/dashboard_page.dart';
 import 'package:todo_app/2_application/pages/detail/todo_detail_page.dart';
 import 'package:todo_app/2_application/pages/home/bloc/navigation_todo_cubit.dart';
+import 'package:todo_app/2_application/pages/home/component/login_button.dart';
 import 'package:todo_app/2_application/pages/overview/overview_page.dart';
 import 'package:todo_app/2_application/pages/settings/settings_page.dart';
 import 'package:todo_app/2_application/pages/tasks/tasks_page.dart';
@@ -90,6 +91,7 @@ class _HomePageState extends State<HomePage> {
                         SettingsPage.pageConfig.icon,
                       ),
                     ),
+                    leading: const LoginButton(),
                     onDestinationSelected: (index) =>
                         _tapOnNavigationDestination(context, index),
                     selectedIndex: widget.index,
@@ -100,6 +102,17 @@ class _HomePageState extends State<HomePage> {
                 ),
               },
             ),
+            topNavigation: SlotLayout(config: <Breakpoint, SlotLayoutConfig>{
+              Breakpoints.small: SlotLayout.from(
+                key: const Key('top-navigation-small'),
+                builder: (context) => const Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    LoginButton(),
+                  ],
+                ),
+              ),
+            }),
             bottomNavigation: SlotLayout(
               config: <Breakpoint, SlotLayoutConfig>{
                 Breakpoints.small: SlotLayout.from(
