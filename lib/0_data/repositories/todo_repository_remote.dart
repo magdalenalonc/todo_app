@@ -118,9 +118,22 @@ class ToDoRepositoryRemote
   }
 
   @override
-  Future<Either<Failure, ToDoEntry>> updateToDoEntry(
-      {required CollectionId collectionId, required EntryId entryId}) {
-    // TODO: implement updateToDoEntry
-    throw UnimplementedError();
+  Future<Either<Failure, ToDoEntry>> updateToDoEntry({
+    required CollectionId collectionId,
+    required ToDoEntry entry,
+  }) async {
+    try {
+      final updateEntry = await remoteSource.updateToDoEntry(
+        userId: userId,
+        collectionId: collectionId.value,
+        entry: toDoEntryToModel(entry),
+      );
+
+      return Right(toDoEntryModelToEntity(updateEntry));
+    } on ServerException catch (e) {
+      return Future.value(Left(ServerFailure(stackTrace: e.toString())));
+    } on Exception catch (e) {
+      return Future.value(Left(ServerFailure(stackTrace: e.toString())));
+    }
   }
 }

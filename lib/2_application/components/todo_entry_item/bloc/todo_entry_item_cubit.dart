@@ -38,17 +38,24 @@ class ToDoEntryItemCubit extends Cubit<ToDoEntryItemState> {
 
   Future<void> update() async {
     try {
-      final updatedEntry = await updateToDoEntry.call(ToDoEntryIdsParam(
-        collectionId: collectionId,
-        entryId: entryId,
-      ));
+      if (state is ToDoEntryItemLoadedState) {
+        final currentEntry = (state as ToDoEntryItemLoadedState).toDoEntry;
 
-      return updatedEntry.fold(
-        (left) => emit(ToDoEntryItemErrorState()),
-        (right) => emit(
-          ToDoEntryItemLoadedState(toDoEntry: right),
-        ),
-      );
+        final entryToUpdate =
+            currentEntry.copyWith(isDone: !currentEntry.isDone);
+
+        final updatedEntry = await updateToDoEntry.call(ToDoEntryParams(
+          collectionId: collectionId,
+          entry: entryToUpdate,
+        ));
+
+        return updatedEntry.fold(
+          (left) => emit(ToDoEntryItemErrorState()),
+          (right) => emit(
+            ToDoEntryItemLoadedState(toDoEntry: right),
+          ),
+        );
+      }
     } on Exception {
       emit(ToDoEntryItemErrorState());
     }
