@@ -26,9 +26,10 @@ dependencies:
   json_annotation: ^4.8.1
   hive: ^2.2.3
   firebase_core: ^2.25.4
-  firebase_auth: ^4.17.4
+  firebase_auth: ^4.17.5
   firebase_ui_auth: ^1.13.0
-  cloud_firestore: ^4.15.4
+  cloud_firestore: ^4.15.5
+  firebase_crashlytics: ^3.4.15
 
 dev_dependencies:
   flutter_test:
