@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:todo_app/0_data/data_sources/interfaces/todo_local_data_source_interface.dart';
 import 'package:todo_app/0_data/exceptions/exceptions.dart';
 import 'package:todo_app/0_data/models/todo_collection_model.dart';
@@ -12,10 +13,12 @@ class HiveLocalDataSource implements ToDoLocalDataSourceInterface {
 
   Future<void> init() async {
     if (!isInitialize) {
+      final directory = await getApplicationDocumentsDirectory();
+
       toDoCollections = await BoxCollection.open(
         'todo',
         {'collection', 'entry'},
-        path: './',
+        path: directory.path,
       );
       isInitialize = true;
     } else {
@@ -64,7 +67,7 @@ class HiveLocalDataSource implements ToDoLocalDataSourceInterface {
       {required String collectionId}) async {
     final collectionBox = await _openCollectionBox();
     final collection =
-        (await collectionBox.get(collectionId))?.cast<String, dynamic>(); 
+        (await collectionBox.get(collectionId))?.cast<String, dynamic>();
     if (collection == null) {
       throw EntryNotFoundException();
     }
