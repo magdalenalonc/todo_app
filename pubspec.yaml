@@ -41,6 +41,9 @@ dev_dependencies:
   json_serializable: ^6.7.1
   build_runner: ^2.4.8
 
+dependency_overrides:
+  web: ^0.4.0
+
 flutter:
   uses-material-design: true
   assets:
