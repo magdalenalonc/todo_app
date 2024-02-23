@@ -1,0 +1,18 @@
+{
+    "settings": "Ustawienia",
+    "login": "Logowanie",
+    "profile": "Profil",
+    "home_dashboard": "Pulpit",
+    "home_overview": "Przegląd",
+    "overview_add_collection": "Dodaj kolekcję",
+    "collection_title": "Stwórz kolekcję",
+    "collection_title_label": "Tytuł",
+    "collection_color_label": "Kolor",
+    "colelction_save": "Zapisz",
+    "detail_title": "Szczegóły kolekcji",
+    "detail_add_todo": "Dodaj ToDo",
+    "todo_title": "Stwórz ToDo",
+    "todo_description_label": "opis",
+    "todo_save": "Zapisz todo",
+    "collection_color_failure": "Tylko cyfry pomiędzy 0 i {numbers} są dozwolone"
+ }

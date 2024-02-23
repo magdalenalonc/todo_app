@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -89,7 +90,7 @@ final routes = GoRouter(
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            title: const Text('Create collection'),
+            title: Text('collection_title'.tr()),
             leading: BackButton(
               onPressed: () {
                 if (context.canPop()) {
