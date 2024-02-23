@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -78,7 +79,8 @@ class _CreateToDoEntryPageState extends State<CreateToDoEntryPage> {
         child: Column(
           children: [
             TextFormField(
-              decoration: const InputDecoration(labelText: 'description'),
+              decoration:
+                  InputDecoration(labelText: 'todo_description_label'.tr()),
               onChanged: (value) {
                 context
                     .read<CreateToDoEntryPageCubit>()
@@ -112,7 +114,7 @@ class _CreateToDoEntryPageState extends State<CreateToDoEntryPage> {
                   context.pop();
                 }
               },
-              child: const Text('Save entry'),
+              child: Text('todo_save'.tr()),
             ),
           ],
         ),

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -16,6 +17,7 @@ import 'package:todo_app/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
 
   if (!kIsWeb || !kDebugMode) {
     FlutterError.onError = (errorDetails) {
@@ -50,14 +52,21 @@ void main() async {
   });
 
   runApp(
-    RepositoryProvider<ToDoRepository>(
-      create: (context) => ToDoRepositoryMixed(
-        remoteSource: remoteDataSource,
-        localDataSource: localDataSource,
-      ),
-      child: BlocProvider<AuthCubit>(
-        create: (context) => authCubit,
-        child: const ToDoApp(),
+    EasyLocalization(
+      useOnlyLangCode: true,
+      supportedLocales: const [Locale('en', 'US'), Locale('pl', 'PL')],
+      path: 'assets/translations',
+      fallbackLocale: const Locale('en', 'US'),
+      startLocale: const Locale('pl', 'PL'),
+      child: RepositoryProvider<ToDoRepository>(
+        create: (context) => ToDoRepositoryMixed(
+          remoteSource: remoteDataSource,
+          localDataSource: localDataSource,
+        ),
+        child: BlocProvider<AuthCubit>(
+          create: (context) => authCubit,
+          child: const ToDoApp(),
+        ),
       ),
     ),
   );
