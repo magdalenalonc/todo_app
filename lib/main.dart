@@ -57,7 +57,7 @@ void main() async {
       supportedLocales: const [Locale('en', 'US'), Locale('pl', 'PL')],
       path: 'assets/translations',
       fallbackLocale: const Locale('en', 'US'),
-      startLocale: const Locale('pl', 'PL'),
+      // startLocale: const Locale('pl', 'PL'),
       child: RepositoryProvider<ToDoRepository>(
         create: (context) => ToDoRepositoryMixed(
           remoteSource: remoteDataSource,
